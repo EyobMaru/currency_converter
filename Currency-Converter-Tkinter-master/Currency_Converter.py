@@ -6,6 +6,7 @@ import tkinter as tk
 import requests
 import datetime as dt
 
+
 # Converting stuff
 class CurrencyConverter:
 
@@ -17,13 +18,14 @@ class CurrencyConverter:
 
     def convert(self, amount, base_currency, des_currency):
         if base_currency != 'EUR':
-            amount = amount/self.rates[base_currency]
+            amount = amount / self.rates[base_currency]
 
         # Limiting the result to 2 decimal places
-        amount = round(amount*self.rates[des_currency], 2)
+        amount = round(amount * self.rates[des_currency], 2)
         # Add comma every 3 numbers
         amount = '{:,}'.format(amount)
         return amount
+
 
 # Main window
 class Main(tk.Tk):
@@ -36,11 +38,13 @@ class Main(tk.Tk):
         self.CurrencyConverter = converter
 
         # Create title label
-        self.title_label = Label(self, text='Currency Converter', bg='#3A3B3C', fg='white', font=('franklin gothic medium', 20), relief='sunken')
+        self.title_label = Label(self, text='Currency Converter', bg='#3A3B3C', fg='white',
+                                 font=('franklin gothic medium', 20), relief='sunken')
         self.title_label.place(x=200, y=35, anchor='center')
 
         # Create date label
-        self.date_label = Label(self, text=f'{dt.datetime.now():%A, %B %d, %Y}', bg='#3A3B3C', fg='white', font=('calibri', 10))
+        self.date_label = Label(self, text=f'{dt.datetime.now():%A, %B %d, %Y}', bg='#3A3B3C', fg='white',
+                                font=('calibri', 10))
         self.date_label.place(x=0, y=400, anchor='sw')
 
         # Create version label
@@ -48,7 +52,8 @@ class Main(tk.Tk):
         self.version_label.place(x=400, y=400, anchor='se')
 
         # Create amount label
-        self.amount_label = Label(self, text='Input Amount: ', bg='#3A3B3C', fg='white', font=('franklin gothic book', 15))
+        self.amount_label = Label(self, text='Input Amount: ', bg='#3A3B3C', fg='white',
+                                  font=('franklin gothic book', 15))
         self.amount_label.place(x=200, y=80, anchor='center')
 
         # Create amount entry box
@@ -57,11 +62,13 @@ class Main(tk.Tk):
         self.amount_entry.place(x=200, y=110, anchor='center')
 
         # Create 'from' label
-        self.base_currency_label = Label(self, text='From: ', bg='#3A3B3C', fg='white', font=('franklin gothic book', 15))
+        self.base_currency_label = Label(self, text='From: ', bg='#3A3B3C', fg='white',
+                                         font=('franklin gothic book', 15))
         self.base_currency_label.place(x=200, y=140, anchor='center')
 
         # Create 'to' label
-        self.destination_currency_label = Label(self, text='To: ', bg='#3A3B3C', fg='white', font=('franklin gothic book', 15))
+        self.destination_currency_label = Label(self, text='To: ', bg='#3A3B3C', fg='white',
+                                                font=('franklin gothic book', 15))
         self.destination_currency_label.place(x=200, y=200, anchor='center')
 
         # Create dropdown menus
@@ -70,10 +77,12 @@ class Main(tk.Tk):
         self.currency_variable1.set('USD')
         self.currency_variable2.set('IDR')
 
-        self.currency_combobox1 = ttk.Combobox(self, width=20, textvariable=self.currency_variable1, values=list(self.CurrencyConverter.rates.keys()), state='readonly')
+        self.currency_combobox1 = ttk.Combobox(self, width=20, textvariable=self.currency_variable1,
+                                               values=list(self.CurrencyConverter.rates.keys()), state='readonly')
         self.currency_combobox1.place(x=200, y=170, anchor='center')
 
-        self.currency_combobox2 = ttk.Combobox(self, width=20, textvariable=self.currency_variable2, values=list(self.CurrencyConverter.rates.keys()), state='readonly')
+        self.currency_combobox2 = ttk.Combobox(self, width=20, textvariable=self.currency_variable2,
+                                               values=list(self.CurrencyConverter.rates.keys()), state='readonly')
         self.currency_combobox2.place(x=200, y=230, anchor='center')
 
         # Create 'convert' button
@@ -85,7 +94,8 @@ class Main(tk.Tk):
         self.clear_button.place(x=230, y=270, anchor='center')
 
         # Create converted result field
-        self.final_result = Label(self, text='', bg='#52595D', fg='white', font=('calibri', 12), relief='sunken', width=40)
+        self.final_result = Label(self, text='', bg='#52595D', fg='white', font=('calibri', 12), relief='sunken',
+                                  width=40)
         self.final_result.place(x=200, y=310, anchor='center')
 
     # Create clear function, to clear the amount field and final result field
@@ -104,7 +114,8 @@ class Main(tk.Tk):
             # Add comma every 3 numbers
             given_amount = '{:,}'.format(given_amount)
 
-            self.final_result.config(text=f'{given_amount} {given_base_currency} = {converted_amount} {given_des_currency}')
+            self.final_result.config(
+                text=f'{given_amount} {given_base_currency} = {converted_amount} {given_des_currency}')
 
         # Create warning message box
         except ValueError:
