@@ -127,3 +127,4 @@ if __name__ == '__main__':
     converter = CurrencyConverter('https://api.exchangerate.host/latest')
     Main(converter)
     mainloop()
+
